@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;
+charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-
+scale=1, maximum-scale=1.0, user-scalable=no"/>
+    <!--Import materialize.css-->
+    <link href="/css/materialize.css"
+          type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+    <title>Default title</title>
+</head>
+<body>
+<nav class="light-blue nav-extended">
+    <div class="row">
+        <div class="nav-wrapper">
+            <div class="container">
+                <a href="/" class="brand-logo">Adam's Blog</a>
+
+                <ul id="nav-mobile" class="col s8 offset-s8 hide-on-med-and-down">
+                    <li class="col s2"><a href="#">Moods</a></li>
+                    <li class="col s2"><a href="#">Articles</a></li>
+                    <li class="col s2"><a href="#">About</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<section layout:fragment="content">
+    <p>Page content goes here</p>
+</section>
+
+<footer class="page-footer">
+    <div class="row container">
+        <h6 class="white-text center-align">Welcome to Adam's blog project.</h6>
+    </div>
+
+    <div class="footer-copyright">
+        <div class="row">
+            <div>
+                © 2018 Copyright Frank Adam.
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script type="text/javascript" src="/js/materialize.js"></script>
+</body>
+</html>

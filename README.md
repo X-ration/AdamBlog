@@ -1,4 +1,5 @@
-##Adam's Blog Project
+Adam's Blog Project
+------
 基于Spring Boot/Materialize Design的个人博客站项目。
 
 进度：

@@ -18,11 +18,37 @@ scale=1, maximum-scale=1.0, user-scalable=no"/>
         <div class="nav-wrapper">
             <div class="container">
                 <a href="/" class="brand-logo">Adam's Blog</a>
-
-                <ul id="nav-mobile" class="col s8 offset-s8 hide-on-med-and-down">
-                    <li class="col s2"><a href="#">Moods</a></li>
-                    <li class="col s2"><a href="#">Articles</a></li>
-                    <li class="col s2"><a href="#">About</a></li>
+                <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+                <ul id="nav-mobile" class="col s8 offset-s8 hide-on-med-and-down center">
+                    <li><a href="#"><i class="material-icons left">face</i>Mood</a></li>
+                    <li><a href="#"><i class="material-icons left">text_fields</i>Blog</a></li>
+                    <li><a class="dropdown-button" data-activates="dropdown" href="#"><i class="material-icons left">person</i>About</a></li>
+                </ul>
+                <!--Dropdown menu content-->
+                <ul id="dropdown" class="collection with-header dropdown-content">
+                    <li class="collection-header"><h4>First Names</h4></li>
+                    <li class="collection-item">Alvin</li>
+                    <li class="collection-item">Alvin</li>
+                    <li class="collection-item">Alvin</li>
+                    <li class="collection-item">Alvin</li>
+                </ul>
+                <!--Side nav bar content-->
+                <ul class="side-nav" id="mobile-demo">
+                    <li><div class="user-view">
+                        <div class="background">
+                            <img src="images/nature.jpg"/>
+                        </div>
+                        <a href="#"><img class="circle" src="images/nature.jpg"/></a>
+                        <a href="#"><span class="white-text name">Frank Adam</span></a>
+                        <a href="#"><span class="white-text email">user@email.com</span></a>
+                    </div></li>
+                    <li><a href="#"><i class="material-icons left">face</i>Mood</a></li>
+                    <li><a href="#"><i class="material-icons left">text_fields</i>Blog</a></li>
+                    <li><a href="#"><i class="material-icons left">person</i>About</a></li>
+                    <li><div class="divider"></div> </li>
+                    <li>
+                        <a href="#"><i class="material-icons left">exit_to_app</i>Logout</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -47,6 +73,14 @@ scale=1, maximum-scale=1.0, user-scalable=no"/>
     </div>
 </footer>
 
-<script type="text/javascript" src="/js/materialize.js"></script>
+<script type="text/javascript" src="/webjars/jquery/2.1.4/jquery.js"/>
+<script type="text/javascript" src="/js/materialize.js"/>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".button-collapse").sideNav();
+    })
+</script>
+<script type="text/javascript" layout:fragment="script">
+</script>
 </body>
 </html>

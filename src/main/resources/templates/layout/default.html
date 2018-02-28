@@ -9,6 +9,7 @@ scale=1, maximum-scale=1.0, user-scalable=no"/>
     <!--Import materialize.css-->
     <link href="/css/materialize.css"
           type="text/css" rel="stylesheet" media="screen,projection"/>
+
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
     <title>Default title</title>
 </head>
@@ -50,6 +51,17 @@ scale=1, maximum-scale=1.0, user-scalable=no"/>
 <section layout:fragment="content">
     <p>Page content goes here</p>
 </section>
+
+<!--floating button-->
+<div class="fixed-action-btn">
+    <a class="btn-floating btn-large red">
+        <i class="large material-icons">add</i>
+    </a>
+    <ul>
+        <li><a class="btn tooltipped btn-floating red" data-position="left" data-delay="50" data-tooltip="New mood!"><i class="material-icons">face</i></a></li>
+        <li><a class="btn tooltipped btn-floating yellow darken-1" data-position="left" data-delay="50" data-tooltip="New article!"><i class="material-icons">text_fields</i></a></li>
+    </ul>
+</div>
 
 <footer class="page-footer">
     <div class="row container">

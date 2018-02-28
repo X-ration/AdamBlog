@@ -1,7 +1,9 @@
 package com.adam.adamblog.mood;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * @author adam
@@ -12,9 +14,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(value = "/mood")
 public class MoodController {
 
+    private MoodRepository repository;
+
+    @Autowired
+    public MoodController(MoodRepository repository) {
+        this.repository = repository;
+        this.repository.init();
+    }
+
     @RequestMapping(value = "")
-    public String viewMoods() {
-        return "mood/ViewMoods";
+    public ModelAndView viewMoods() {
+        ModelAndView modelAndView = new ModelAndView("mood/ViewMoods");
+        modelAndView.addObject("moods",repository.findAll());
+        return modelAndView;
     }
 
     @RequestMapping(value = "/newmood")

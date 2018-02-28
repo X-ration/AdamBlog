@@ -5,14 +5,50 @@
 <head>
     <meta charset="UTF-8"/>
     <title>View Moods</title>
+    <link href="/css/custom.css"
+          type="text/css" rel="stylesheet" media="screen,projection"/>
 </head>
 <body>
 
 <div layout:fragment="content">
-Here are all moods.
+
+    <div class="row">
+        <nav>
+            <div class="nav-wrapper container">
+                <div class="col s12">
+                    <a href="/" class="breadcrumb">Index</a>
+                    <a class="breadcrumb">Moods</a>
+
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div class="row container">
+            <div th:each="mood:${moods}">
+                <div class="col s12 m4">
+                    <div id="card" class="card blue lighten-5">
+                        <div class="card-image">
+                            <img th:src="@{${mood.imageUrl}}" th:if="${mood.hasImage}"/>
+                            <img src="/images/default_mood.jpg" th:if="${!mood.hasImage}"/>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-title" th:text="|${mood.userName} : ${mood.title}|">Card Title</span>
+                            <p th:text="${mood.content.substring(0,40)+'...'}">Card content</p>
+                        </div>
+                        <div class="card-action" th:if="${mood.hasLink}">
+                            <a th:href="${mood.linkUrl}" th:text="${mood.linkDescription}">Card link</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+
 </div>
 
-<script layout:fragment="script" src="js/materialize.js">
+     <!--top right bottom left-->
+
+<script layout:fragment="script">
+
 </script>
 </body>
 </html>

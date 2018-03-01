@@ -64,8 +64,8 @@
             </div>
             <!-- Hidden div used to get checkbox value -->
             <div class="row" hidden="hidden">
-                <input th:field="${moodForm.hasImage}" value="false" id="hasImage" type="checkbox"/>
-                <input th:field="${moodForm.hasLink}" value="false" id="hasLink" type="checkbox"/>
+                <input th:field="${moodForm.hasImage}" id="hasImage" type="checkbox"/>
+                <input th:field="${moodForm.hasLink}" id="hasLink" type="checkbox"/>
             </div>
             <!-- Choose image -->
             <div class="row" id="file" hidden="hidden">
@@ -106,11 +106,11 @@
         if(checkbox.checked==true) {
             $("#file").removeAttr("hidden");
             $("#chooseFile").attr("required","required");
-            $("#hasImage").attr("checked",true);
+            $("#hasImage").attr("checked","checked");
         } else {
             $("#file").attr("hidden","hidden");
             $("#chooseFile").removeAttr("required");
-            $("#hasImage").attr("checked",false);
+            $("#hasImage").removeAttr("checked");
         }
     }
     function activateLink(checkbox) {
@@ -118,12 +118,12 @@
             $("#link").removeAttr("hidden");
             $("#editLink").attr("required","required");
             $("#linkDescription").removeAttr("hidden");
-            $("#hasLink").attr("checked",true);
+            $("#hasLink").attr("checked","checked");
         } else {
             $("#link").attr("hidden","hidden");
             $("#editLink").removeAttr("required");
             $("#linkDescription").attr("hidden","hidden");
-            $("#hasLink").attr("checked",false);
+            $("#hasLink").removeAttr("checked");
         }
     }
 </script>

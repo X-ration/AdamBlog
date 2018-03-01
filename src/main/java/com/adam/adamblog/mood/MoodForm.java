@@ -1,47 +1,25 @@
 package com.adam.adamblog.mood;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 /**
  * @author adam
- * 创建于 2018-02-28 14:29.
- * 心情对象实体类。
+ * 创建于 2018-03-01 10:39.
+ * 用于从前端注入的心情表单对象。
  */
-public class Mood {
+public class MoodForm {
 
-    private String moodId;
     private String userName;
     private String title;
     private String content;
     private Boolean hasImage;
-    private String imageUrl;
     private Boolean hasLink;
     private String linkUrl;
     private String linkDescription;
 
-    public Mood(String userName, String title, String content, Boolean hasImage, String imageUrl, Boolean hasLink, String linkUrl, String linkDescription) {
-        this.userName = userName;
-        this.title = title;
-        this.content = content;
-        this.hasImage = hasImage;
-        this.imageUrl = imageUrl;
-        this.hasLink = hasLink;
-        this.linkUrl = linkUrl;
-        this.linkDescription = linkDescription;
-    }
-
-    public Mood() {
-        this.userName = "";
-        this.title = "";
-        this.content = "";
-        this.hasImage = false;
-        this.imageUrl = "";
-        this.hasLink = false;
-        this.linkUrl = "";
-        this.linkDescription = "";
-    }
-
     @Override
     public String toString() {
-        return "[Mood]User:" + userName + "&Title:" + title;
+        return "[MoodForm]User:" + userName + " Title:" + title;
     }
 
     public String getUserName() {
@@ -50,14 +28,6 @@ public class Mood {
 
     public void setUserName(String userName) {
         this.userName = userName;
-    }
-
-    public String getMoodId() {
-        return moodId;
-    }
-
-    public void setMoodId(String moodId) {
-        this.moodId = moodId;
     }
 
     public String getTitle() {
@@ -82,14 +52,6 @@ public class Mood {
 
     public void setHasImage(Boolean hasImage) {
         this.hasImage = hasImage;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
     }
 
     public Boolean getHasLink() {

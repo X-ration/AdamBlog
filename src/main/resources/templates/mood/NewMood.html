@@ -9,10 +9,123 @@
 <body>
 
 <div layout:fragment="content">
-    Here is new mood.
+    <div class="row">
+        <nav>
+            <div class="nav-wrapper container">
+                <div class="col s12">
+                    <a href="/" class="breadcrumb">Index</a>
+                    <a href="/mood/" class="breadcrumb">Moods</a>
+                    <a class="breadcrumb">New Mood</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div class="row container">
+        <form action="/mood/newmood" method="post" class="col s12" th:object="${moodForm}">
+            <!-- Key content -->
+            <h4>Key content</h4>
+            <!-- User name -->
+            <div class="row">
+                <div class="input-field col s12 m6">
+                    <i class="material-icons prefix">person</i>
+                    <input th:field="${moodForm.userName}" id="userName" type="text" required="required"/>
+                    <label for="userName">Your Name</label>
+                </div>
+            </div>
+            <!-- Mood title -->
+            <div class="row">
+                <div class="input-field col s12 m6">
+                    <i class="material-icons prefix">title</i>
+                    <input th:field="${moodForm.title}" id="moodTitle" type="text" required="required"/>
+                    <label for="moodTitle">Mood title</label>
+                </div>
+            </div>
+            <!-- Mood content -->
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">mode_edit</i>
+                    <textarea th:field="${moodForm.content}" placeholder="Tell us your feeling right now!" id="moodContent" required="required" class="materialize-textarea"></textarea>
+                    <label for="moodContent">Mood content</label>
+                </div>
+            </div>
+            <!-- Additional options -->
+            <h4>Additional options</h4>
+            <div class="row">
+                <!-- has image -->
+                <p class="col s12 m4">
+                    <input type="checkbox" class="filled-in" id="addImage" onclick="activateImage(this)"/>
+                    <label for="addImage">Additional image</label>
+                </p>
+                <!-- has link -->
+                <p class="col s12 m4">
+                    <input type="checkbox" class="filled-in" id="addLink" onclick="activateLink(this)"/>
+                    <label for="addLink">Additional link</label>
+                </p>
+            </div>
+            <!-- Hidden div used to get checkbox value -->
+            <div class="row" hidden="hidden">
+                <input th:field="${moodForm.hasImage}" value="false" id="hasImage" type="checkbox"/>
+                <input th:field="${moodForm.hasLink}" value="false" id="hasLink" type="checkbox"/>
+            </div>
+            <!-- Choose image -->
+            <div class="row" id="file" hidden="hidden">
+                <div class="file-field input-field btn-small col s12">
+                    <div class="btn waves-effect flow">
+                        <span>Choose</span>
+                        <input id="chooseFile" type="file" class="btn-small"/>
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input id="imagePath" disabled="disabled" class="file-path" type="text"/>
+                    </div>
+                </div>
+            </div>
+            <!-- Add link -->
+            <div class="row" id="link" hidden="hidden">
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">link</i>
+                    <input th:field="${moodForm.linkUrl}" id="editLink" value="http://" type="text" class="validate" pattern="https?://.+\..+"/>
+                    <label for="editLink" data-error="Please input a valid url." data-success="This url is valid.">Additional Link</label>
+                </div>
+            </div>
+            <div class="row" id="linkDescription" hidden="hidden">
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">description</i>
+                    <input th:field="${moodForm.linkDescription}" id="editLinkDescription" placeholder="Link description(optional)" type="text"/>
+                    <label for="editLinkDescription">Link Description</label>
+                </div>
+            </div>
+            <br/>
+            <button type="submit" name="submitMood"
+                    class="btn waves-effect waves-light">Publish mood</button>
+        </form>
+    </div>
 </div>
 
-<script layout:fragment="script" src="js/materialize.js">
+<script layout:fragment="script">
+    function activateImage(checkbox) {
+        if(checkbox.checked==true) {
+            $("#file").removeAttr("hidden");
+            $("#chooseFile").attr("required","required");
+            $("#hasImage").attr("checked",true);
+        } else {
+            $("#file").attr("hidden","hidden");
+            $("#chooseFile").removeAttr("required");
+            $("#hasImage").attr("checked",false);
+        }
+    }
+    function activateLink(checkbox) {
+        if(checkbox.checked == true) {
+            $("#link").removeAttr("hidden");
+            $("#editLink").attr("required","required");
+            $("#linkDescription").removeAttr("hidden");
+            $("#hasLink").attr("checked",true);
+        } else {
+            $("#link").attr("hidden","hidden");
+            $("#editLink").removeAttr("required");
+            $("#linkDescription").attr("hidden","hidden");
+            $("#hasLink").attr("checked",false);
+        }
+    }
 </script>
 </body>
 </html>

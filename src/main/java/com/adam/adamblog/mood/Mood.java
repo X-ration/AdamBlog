@@ -1,5 +1,7 @@
 package com.adam.adamblog.mood;
 
+import java.time.LocalDateTime;
+
 /**
  * @author adam
  * 创建于 2018-02-28 14:29.
@@ -9,39 +11,39 @@ public class Mood {
 
     private String moodId;
     private String userName;
-    private String title;
     private String content;
     private Boolean hasImage;
     private String imageUrl;
     private Boolean hasLink;
     private String linkUrl;
     private String linkDescription;
+    private LocalDateTime createdAt;
 
-    public Mood(String userName, String title, String content, Boolean hasImage, String imageUrl, Boolean hasLink, String linkUrl, String linkDescription) {
+    public Mood(String userName, String content, Boolean hasImage, String imageUrl, Boolean hasLink, String linkUrl, String linkDescription, LocalDateTime createdAt) {
         this.userName = userName;
-        this.title = title;
         this.content = content;
         this.hasImage = hasImage;
         this.imageUrl = imageUrl;
         this.hasLink = hasLink;
         this.linkUrl = linkUrl;
         this.linkDescription = linkDescription;
+        this.createdAt = createdAt;
     }
 
     public Mood() {
         this.userName = "";
-        this.title = "";
         this.content = "";
         this.hasImage = false;
         this.imageUrl = "";
         this.hasLink = false;
         this.linkUrl = "";
         this.linkDescription = "";
+        this.createdAt = null;
     }
 
     @Override
     public String toString() {
-        return "[Mood]User:" + userName + "&Title:" + title;
+        return "[Mood]User:" + userName;
     }
 
     public String getUserName() {
@@ -60,13 +62,6 @@ public class Mood {
         this.moodId = moodId;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
 
     public String getContent() {
         return content;
@@ -114,5 +109,13 @@ public class Mood {
 
     public void setLinkDescription(String linkDescription) {
         this.linkDescription = linkDescription;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 }

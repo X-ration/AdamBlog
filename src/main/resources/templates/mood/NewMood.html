@@ -21,7 +21,7 @@
         </nav>
     </div>
     <div class="row container">
-        <form action="/mood/newmood" method="post" class="col s12" th:object="${moodForm}">
+        <form action="/mood/newmood" method="post" enctype="multipart/form-data" class="col s12" th:object="${moodForm}">
             <!-- Key content -->
             <h4>Key content</h4>
             <!-- User name -->
@@ -30,14 +30,6 @@
                     <i class="material-icons prefix">person</i>
                     <input th:field="${moodForm.userName}" id="userName" type="text" required="required"/>
                     <label for="userName">Your Name</label>
-                </div>
-            </div>
-            <!-- Mood title -->
-            <div class="row">
-                <div class="input-field col s12 m6">
-                    <i class="material-icons prefix">title</i>
-                    <input th:field="${moodForm.title}" id="moodTitle" type="text" required="required"/>
-                    <label for="moodTitle">Mood title</label>
                 </div>
             </div>
             <!-- Mood content -->
@@ -69,10 +61,10 @@
             </div>
             <!-- Choose image -->
             <div class="row" id="file" hidden="hidden">
-                <div class="file-field input-field btn-small col s12">
+                <div class="file-field input-field col s12">
                     <div class="btn waves-effect flow">
                         <span>Choose</span>
-                        <input id="chooseFile" type="file" class="btn-small"/>
+                        <input id="chooseImage" name="chooseImage" type="file" class="btn-small"/>
                     </div>
                     <div class="file-path-wrapper">
                         <input id="imagePath" disabled="disabled" class="file-path" type="text"/>
@@ -95,7 +87,7 @@
                 </div>
             </div>
             <br/>
-            <button type="submit" name="submitMood"
+            <button id="submitMood" type="submit" name="submitMood"
                     class="btn waves-effect waves-light">Publish mood</button>
         </form>
     </div>
@@ -105,12 +97,14 @@
     function activateImage(checkbox) {
         if(checkbox.checked==true) {
             $("#file").removeAttr("hidden");
-            $("#chooseFile").attr("required","required");
+            $("#chooseImage").attr("required","required");
             $("#hasImage").attr("checked","checked");
+            $("#submitMood").attr("name","submitMood_image");
         } else {
             $("#file").attr("hidden","hidden");
-            $("#chooseFile").removeAttr("required");
+            $("#chooseImage").removeAttr("required");
             $("#hasImage").removeAttr("checked");
+            $("#submitMood").attr("name","submitMood");
         }
     }
     function activateLink(checkbox) {

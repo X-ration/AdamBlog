@@ -2,10 +2,8 @@ package com.adam.adamblog.mood;
 
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.time.LocalDateTime;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -19,15 +17,15 @@ public class MoodRepository {
     private final Map<String,Mood> moodMap = new ConcurrentHashMap<>();
 
     public void init() {
-        addMood(new Mood("Frank Adam","Adam's Blog项目正式启动","基于Spring Boot和Material Design的个人博客站Adam's Blog项目正式启动。",
-                true, "/images/nature.jpg",
-                true, "/", "Adam's Blog"));
-        addMood(new Mood("Google Inc.","发现Microsoft Edge重大安全漏洞", "我们的研究团队最近刚刚发现Microsoft Edge浏览器中存在的一项重要安全漏洞，目前微软方面尚未给出解决方案，我们推荐更快更安全的全新Chrome浏览器。",
+        addMood(new Mood("Frank Adam","基于Spring Boot和Material Design的个人博客站Adam's Blog项目正式启动。",
+                false, "/images/nature.jpg",
+                true, "/", "Adam's Blog", LocalDateTime.parse("2017-09-09T10:53:03")));
+        addMood(new Mood("Google Inc.", "我们的研究团队最近刚刚发现Microsoft Edge浏览器中存在的一项重要安全漏洞，目前微软方面尚未给出解决方案，我们推荐更快更安全的全新Chrome浏览器。",
                 false, "",
-                false, "", ""));
-        addMood(new Mood("Nadella","再见，Windows Phone！", "今天，我们怀着无比沉痛的心情，向各位热爱微软手机业务的同志们郑重宣告，因发展停滞，Windows Phone业务正式停止。",
-                true, "/images/default_mood.jpg",
-                false, "", ""));
+                false, "", "",LocalDateTime.parse("2018-01-03T03:56:12")));
+        addMood(new Mood("Nadella", "今天，我们怀着无比沉痛的心情，向各位热爱微软手机业务的同志们郑重宣告，因发展停滞，Windows Phone业务正式停止。",
+                false, "/images/default_mood.jpg",
+                false, "", "",LocalDateTime.parse("2018-03-01T13:34:12")));
         System.out.println("Mood repository init complete");
     }
 
@@ -54,9 +52,13 @@ public class MoodRepository {
     }
 
     public List<Mood> findAll() {
-        return new ArrayList<>(moodMap.values());
+        ArrayList<Mood> arrayList = new ArrayList<>(moodMap.values());
+        arrayList.sort(Comparator.comparing(Mood::getCreatedAt).reversed());
+        return arrayList;
     }
-
+    public Mood findById(String uniqueId) {
+        return moodMap.get(uniqueId);
+    }
     public Boolean exists(String moodId) {
         return moodMap.containsKey(moodId);
     }

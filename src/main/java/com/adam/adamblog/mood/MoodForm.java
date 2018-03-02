@@ -1,6 +1,6 @@
 package com.adam.adamblog.mood;
 
-import org.hibernate.validator.constraints.NotEmpty;
+import java.time.LocalDateTime;
 
 /**
  * @author adam
@@ -10,16 +10,16 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class MoodForm {
 
     private String userName;
-    private String title;
     private String content;
     private Boolean hasImage;
     private Boolean hasLink;
     private String linkUrl;
     private String linkDescription;
+    private LocalDateTime createdAt;
 
     @Override
     public String toString() {
-        return "[MoodForm]User:" + userName + " Title:" + title;
+        return "[MoodForm]User:" + userName;
     }
 
     public String getUserName() {
@@ -28,14 +28,6 @@ public class MoodForm {
 
     public void setUserName(String userName) {
         this.userName = userName;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public String getContent() {

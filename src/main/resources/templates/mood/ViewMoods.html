@@ -18,22 +18,24 @@
                 <div class="col s12">
                     <a href="/" class="breadcrumb">Index</a>
                     <a class="breadcrumb">Moods</a>
-
                 </div>
             </div>
         </nav>
     </div>
     <div class="row container">
             <div th:each="mood:${moods}">
-                <div class="col s12 m4">
-                    <div id="card" class="card blue lighten-5">
+                <div class="col s12 m6 xl4">
+                    <div id="card" class="card medium blue lighten-5">
                         <div class="card-image">
-                            <img th:src="@{${mood.imageUrl}}" th:if="${mood.hasImage}"/>
+                            <img th:src="@{|/image/mood/${mood.imageUrl}|}" th:if="${mood.hasImage}"/>
                             <img src="/images/default_mood.jpg" th:if="${!mood.hasImage}"/>
                         </div>
                         <div class="card-content">
-                            <span class="card-title" th:text="|${mood.userName} : ${mood.title}|">Card Title</span>
-                            <p th:text="${mood.content.substring(0,40)+'...'}">Card content</p>
+                            <i class="material-icons left">sentiment_very_satisfied</i>
+                            <span class="card-title" th:text="|${mood.userName}|">Card Title</span>
+                            <i class="material-icons left tiny">timer</i>
+                            <p th:text="${mood.createdAt}">Time</p>
+                            <p th:text="${(mood.content.length()>30)?(mood.content.substring(0,30)+'...'):mood.content}">Card content</p>
                         </div>
                         <div class="card-action" th:if="${mood.hasLink}">
                             <a th:href="${mood.linkUrl}" th:text="${mood.linkDescription}">Card link</a>

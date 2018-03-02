@@ -1,5 +1,7 @@
 package com.adam.adamblog.mood;
 
+import com.adam.adamblog.util.TimeFormatter;
+
 import java.time.LocalDateTime;
 
 /**
@@ -117,5 +119,9 @@ public class Mood {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public String getCreatedAtFormatted() {
+        return TimeFormatter.format(createdAt);
     }
 }

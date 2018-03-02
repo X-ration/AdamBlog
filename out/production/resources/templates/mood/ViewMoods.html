@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="layout/default">
+      layout:decorator="layout/default_with_floatingbutton">
 <head>
     <meta charset="UTF-8"/>
     <title>View Moods</title>
@@ -34,7 +34,7 @@
                             <i class="material-icons left">sentiment_very_satisfied</i>
                             <span class="card-title" th:text="|${mood.userName}|">Card Title</span>
                             <i class="material-icons left tiny">timer</i>
-                            <p th:text="${mood.createdAt}">Time</p>
+                            <p th:text="${mood.getCreatedAtFormatted()}">Time</p>
                             <p th:text="${(mood.content.length()>30)?(mood.content.substring(0,30)+'...'):mood.content}">Card content</p>
                         </div>
                         <div class="card-action" th:if="${mood.hasLink}">

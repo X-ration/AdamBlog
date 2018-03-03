@@ -27,7 +27,7 @@ import java.time.LocalDateTime;
 public class MoodController {
 
     private MoodRepository repository;
-    public static final Resource picturesDir = new FileSystemResource("./images/mood/");
+    public static final Resource picturesDir = new FileSystemResource("/home/adam/document/images/mood/");
 
     @Autowired
     public MoodController(MoodRepository repository) {

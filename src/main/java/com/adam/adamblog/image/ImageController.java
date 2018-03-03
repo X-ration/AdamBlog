@@ -30,14 +30,14 @@ public class ImageController {
 
     @RequestMapping(value = "/image/mood/{imageUrl}", method = RequestMethod.GET)
     public void getMoodImage(HttpServletResponse response, @PathVariable String imageUrl) throws IOException {
-        Resource resource = new FileSystemResource("./images/mood/"+imageUrl);
+        Resource resource = new FileSystemResource("/home/adam/document/images/mood/"+imageUrl);
         response.setHeader("Content-Type", URLConnection.guessContentTypeFromName(resource.getFilename()));
         IOUtils.copy(resource.getInputStream(), response.getOutputStream());
     }
 
     @RequestMapping(value = "/image/blog/article/{imageUrl}",method = RequestMethod.GET)
     public void getArticleImage(HttpServletResponse response, @PathVariable String imageUrl) throws IOException {
-        Resource resource = new FileSystemResource("./images/blog/article/"+imageUrl);
+        Resource resource = new FileSystemResource("/home/adam/document/images/blog/article/"+imageUrl);
         response.setHeader("Content-Type", URLConnection.guessContentTypeFromName(resource.getFilename()));
         IOUtils.copy(resource.getInputStream(), response.getOutputStream());
     }

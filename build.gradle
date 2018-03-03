@@ -8,6 +8,7 @@ buildscript {
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
 	}
+
 }
 
 apply plugin: 'java'
@@ -25,7 +26,6 @@ repositories {
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
-	//compile('org.webjars:materializecss:0.100.alpha-4')
 	compile('org.webjars:jquery:2.1.4')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }

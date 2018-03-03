@@ -1,5 +1,6 @@
-package com.adam.adamblog.mood;
+package com.adam.adamblog.image;
 
+import com.adam.adamblog.mood.MoodRepository;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
@@ -29,9 +30,14 @@ public class ImageController {
 
     @RequestMapping(value = "/image/mood/{imageUrl}", method = RequestMethod.GET)
     public void getMoodImage(HttpServletResponse response, @PathVariable String imageUrl) throws IOException {
+        Resource resource = new FileSystemResource("./images/mood/"+imageUrl);
+        response.setHeader("Content-Type", URLConnection.guessContentTypeFromName(resource.getFilename()));
+        IOUtils.copy(resource.getInputStream(), response.getOutputStream());
+    }
 
-        //String imageUrl = moodRepository.findById(moodId).getImageUrl();
-        Resource resource = new FileSystemResource("./images/"+imageUrl);
+    @RequestMapping(value = "/image/blog/article/{imageUrl}",method = RequestMethod.GET)
+    public void getArticleImage(HttpServletResponse response, @PathVariable String imageUrl) throws IOException {
+        Resource resource = new FileSystemResource("./images/blog/article/"+imageUrl);
         response.setHeader("Content-Type", URLConnection.guessContentTypeFromName(resource.getFilename()));
         IOUtils.copy(resource.getInputStream(), response.getOutputStream());
     }

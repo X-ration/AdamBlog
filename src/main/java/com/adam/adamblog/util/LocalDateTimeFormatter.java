@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
  * 创建于 2018-03-02 21:01.
  * 用于对LocalDateTime对象格式化。
  */
-public class TimeFormatter {
+public class LocalDateTimeFormatter {
 
     /**
      * 将LocalDateTime格式化为yyyy-MM-dd HH:mm格式。

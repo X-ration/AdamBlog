@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+<head>
+    <meta charset="UTF-8"/>
+    <title>View Article</title>
+</head>
+<body>
+
+<div layout:fragment="content">
+    <div class="row">
+        <nav>
+            <div class="nav-wrapper container">
+                <div class="col s12">
+                    <a href="/" class="breadcrumb">Index</a>
+                    <a href="/blog/" class="breadcrumb">Blog</a>
+                    <a class="breadcrumb">Article</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div th:object="${article}" class="container">
+        <div>
+            <div class="row"></div>
+            <div class="row">
+                <h4 th:text="${article.title}" style="font-weight: bold;">Title</h4>
+            </div>
+            <div class="row teal-text">
+                <div class="col s6 m4 l3">
+                    <i class="material-icons left">person</i>
+                    <span th:text="${article.author}">Author</span>
+                </div>
+                <div class="col s6 m4 l3">
+                    <i class="material-icons left">timer</i>
+                    <span th:text="${article.getCreatedAtFormatted()}" class="teal-text">CreatedAt</span>
+                </div>
+            </div>
+        </div>
+        <div class="row"><hr color="#bdbdbd"/></div>
+        <div class="row">
+            <img th:src="@{|/image/blog/article/${article.imageUrl}|}" th:if="${article.hasImage}"
+                 class="responsive-img col s10 m8 offset-s1 offset-m2"/>
+        </div>
+        <div class="row" th:each="para:${article.contentParagraphs}">
+            <p th:text="|&ensp;&ensp;${para}|" style="letter-spacing: 0.07em">Paragraph</p>
+        </div>
+        <div class="row">
+            <div th:if="${article.hasLink}">
+                <a th:href="${article.linkUrl}" th:text="|&ensp;&ensp;${article.linkDescription}|" style="color: #ffab40;">&ensp;&ensp;Additional link</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script layout:fragment="script">
+</script>
+</body>
+</html>

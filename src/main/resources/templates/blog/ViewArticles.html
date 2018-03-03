@@ -9,7 +9,31 @@
 <body>
 
 <div layout:fragment="content">
-    Here are all articles.
+    <div class="row">
+        <nav>
+            <div class="nav-wrapper container">
+                <div class="col s12">
+                    <a href="/" class="breadcrumb">Index</a>
+                    <a class="breadcrumb">Blog</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div class="container" th:each="article:${articles}">
+        <ul class="collapsible" data-collapsible="expandable">
+            <li>
+                <div class="collapsible-header">
+                    <i class="material-icons">description</i><span th:text="|${article.author} : ${article.title}|" style="font-weight:bold ">title</span>
+                </div>
+                <div class="collapsible-body">
+                    <div>
+                        <span th:text="${article.articleAbstract}">abstract</span>
+                        <br/><br/><a th:href="@{|/blog/article/${article.articleId}|}" style="color: #ffab40;">Detail</a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
 </div>
 
 <script layout:fragment="script" src="js/materialize.js">

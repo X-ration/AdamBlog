@@ -44,10 +44,8 @@
                 <hr color="#bdbdbd"/>
             </div>
         </div>
-        <div class="row">
-            <img th:src="@{|/image/blog/article/${article.imageUrl}|}" th:if="${article.hasImage}"
-                 class="responsive-img col s10 m8 offset-s1 offset-m2"/>
-        </div>
+        <img th:src="@{|/image/blog/article/${article.imageUrl}|}" th:if="${article.hasImage}"
+                 class="responsive-img" width="80%" style="display: block; margin-left: auto; margin-right: auto;"/>
         <div class="row" th:each="para:${article.contentParagraphs}">
             <p th:text="|&ensp;&ensp;${para}|" style="letter-spacing: 0.07em">Paragraph</p>
         </div>

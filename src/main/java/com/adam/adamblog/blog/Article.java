@@ -3,6 +3,7 @@ package com.adam.adamblog.blog;
 import com.adam.adamblog.util.LocalDateTimeFormatter;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -144,7 +145,21 @@ public class Article {
         this.createdAt = createdAt;
     }
 
-    public String getCreatedAtFormatted() {
-        return LocalDateTimeFormatter.format(createdAt);
+    public String getCreatedAtFormattedFull() {
+        return LocalDateTimeFormatter.formatFull(createdAt);
     }
+
+    public String getCreatedAtFormattedDynamic() {
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime currentDay = LocalDateTime.of(now.toLocalDate(), LocalTime.of(0,0,0));
+        LocalDateTime currentYear = LocalDateTime.of(now.getYear(),1,1,0,0,0);
+        if(!createdAt.isBefore(currentDay)) {
+            return LocalDateTimeFormatter.formatTimeHourMinute(createdAt);
+        } else if (!createdAt.isBefore(currentYear)) {
+            return LocalDateTimeFormatter.formatDateMonthDay(createdAt);
+        } else {
+            return LocalDateTimeFormatter.formatDateFull(createdAt);
+        }
+    }
+
 }

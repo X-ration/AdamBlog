@@ -31,11 +31,14 @@
                             <img src="/images/default_mood.jpg" th:if="${!mood.hasImage}"/>
                         </div>
                         <div class="card-content">
-                            <i class="material-icons left">sentiment_very_satisfied</i>
-                            <span class="card-title" th:text="|${mood.userName}|">Card Title</span>
-                            <i class="material-icons left tiny">timer</i>
-                            <p th:text="${mood.getCreatedAtFormatted()}">Time</p>
-                            <p th:text="${(mood.content.length()>30)?(mood.content.substring(0,30)+'...'):mood.content}">Card content</p>
+                            <div class="row">
+                                <span class="card-title" th:text="|&ensp;&ensp;${mood.userName}|">Card Title</span>
+                            </div>
+                            <div>
+                                <i class="material-icons left tiny">timer</i>
+                                <span th:text="${mood.getCreatedAtFormatted()}">Time</span>
+                                <p th:text="${(mood.content.length()>30)?(mood.content.substring(0,30)+'...'):mood.content}">Card content</p>
+                            </div>
                         </div>
                         <div class="card-action" th:if="${mood.hasLink}">
                             <a th:href="${mood.linkUrl}" th:text="${mood.linkDescription}">Card link</a>

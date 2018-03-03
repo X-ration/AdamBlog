@@ -35,23 +35,11 @@ public class MoodController {
         this.repository.init();
     }
 
-    @ModelAttribute
-    public MoodForm getMoodForm() {
-        MoodForm moodForm = new MoodForm();
-        System.out.println(moodForm);
-        return moodForm;
-    }
-
     @RequestMapping(value = "")
     public ModelAndView viewMoods() {
         ModelAndView modelAndView = new ModelAndView("mood/ViewMoods");
         modelAndView.addObject("moods",repository.findAll());
         return modelAndView;
-    }
-
-    @RequestMapping(value = "/newmood", method = RequestMethod.GET)
-    public String newMood() {
-        return "mood/NewMood";
     }
 
     @RequestMapping(value = "/newmood", params = {"submitMood"}, method = RequestMethod.POST)

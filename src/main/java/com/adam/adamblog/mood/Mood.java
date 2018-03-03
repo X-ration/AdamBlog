@@ -122,6 +122,6 @@ public class Mood {
     }
 
     public String getCreatedAtFormatted() {
-        return LocalDateTimeFormatter.format(createdAt);
+        return LocalDateTimeFormatter.formatFull(createdAt);
     }
 }

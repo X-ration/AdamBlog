@@ -24,7 +24,9 @@
         <div>
             <div class="row"></div>
             <div class="row">
-                <h4 th:text="${article.title}" style="font-weight: bold;">Title</h4>
+                <div class="col s12">
+                    <h4 th:text="${article.title}" style="font-weight: bold;">Title</h4>
+                </div>
             </div>
             <div class="row teal-text">
                 <div class="col s6 m4 l3">
@@ -33,11 +35,15 @@
                 </div>
                 <div class="col s6 m4 l3">
                     <i class="material-icons left">timer</i>
-                    <span th:text="${article.getCreatedAtFormatted()}" class="teal-text">CreatedAt</span>
+                    <span th:text="${article.getCreatedAtFormattedDynamic()}" class="teal-text">CreatedAt</span>
                 </div>
             </div>
         </div>
-        <div class="row"><hr color="#bdbdbd"/></div>
+        <div class="row">
+            <div class="col s12">
+                <hr color="#bdbdbd"/>
+            </div>
+        </div>
         <div class="row">
             <img th:src="@{|/image/blog/article/${article.imageUrl}|}" th:if="${article.hasImage}"
                  class="responsive-img col s10 m8 offset-s1 offset-m2"/>

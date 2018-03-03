@@ -19,11 +19,14 @@
             </div>
         </nav>
     </div>
+    <div class="row container">
+        <h4 class="col s12">Articles</h4>
+    </div>
     <div class="container" th:each="article:${articles}">
         <ul class="collapsible" data-collapsible="expandable">
             <li>
                 <div class="collapsible-header">
-                    <i class="material-icons">description</i><span th:text="|${article.author} : ${article.title}|" style="font-weight:bold ">title</span>
+                    <i class="material-icons">description</i><span th:text="|${article.getCreatedAtFormattedDynamic()} ${article.author} : ${article.title}|" style="font-weight:bold ">title</span>
                 </div>
                 <div class="collapsible-body">
                     <div>

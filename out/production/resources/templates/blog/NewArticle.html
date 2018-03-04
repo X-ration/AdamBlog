@@ -50,7 +50,7 @@
             </div>
             <!-- Content Paragraphs -->
             <div id="paragraphs">
-                <div class="row">
+                <div class="row" id="para0">
                     <div class="input-field col s10">
                         <i class="material-icons prefix">mode_edit</i>
                         <textarea th:field="${article.contentParagraphs[0]}" id="contentParagraph0" required="required" class="materialize-textarea"></textarea>
@@ -63,8 +63,42 @@
                     </div>
                 </div>
             </div>
+            <!-- Additional options -->
+            <h4>Additional options</h4>
+            <div class="row">
+                <!-- has image -->
+                <p class="col s12 m4">
+                    <input type="checkbox" class="filled-in" id="addImage" onclick="activateImage(this)"/>
+                    <label for="addImage">Additional image</label>
+                </p>
+                <!-- has link -->
+                <p class="col s12 m4">
+                    <input type="checkbox" class="filled-in" id="addLink" onclick="activateLink(this)"/>
+                    <label for="addLink">Additional link</label>
+                </p>
+            </div>
+            <!-- Hidden div used to get checkbox value -->
+            <div class="row" hidden="hidden">
+                <input th:field="${article.hasImage}" id="hasImage" type="checkbox"/>
+                <input th:field="${article.hasLink}" id="hasLink" type="checkbox"/>
+            </div>
+            <!-- Add link -->
+            <div class="row" id="link" hidden="hidden">
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">link</i>
+                    <input th:field="${article.linkUrl}" id="editLink" value="http://" type="text" class="validate" pattern="https?://.+\..+"/>
+                    <label for="editLink" data-error="Please input a valid url." data-success="This url is valid.">Additional Link</label>
+                </div>
+            </div>
+            <div class="row" id="linkDescription" hidden="hidden">
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">description</i>
+                    <input th:field="${article.linkDescription}" id="editLinkDescription" placeholder="Link description(optional)" type="text"/>
+                    <label for="editLinkDescription">Link Description</label>
+                </div>
+            </div>
             <button id="submitArticle" type="submit" name="submitArticle"
-                    class="btn waves-effect waves-light">Publish article</button>
+                    class="btn waves-effect waves-light teal lighten-2">Publish article</button>
 
         </form>
     </div>
@@ -76,10 +110,11 @@
         currentLocation += 1;
         $('.tooltipped').tooltip('remove');
         $("#addParagraphButton").remove();
-
+        $("#dropParagraphButton").remove();
 
         var $row = $("<div></div>");
         $row.attr("class","row");
+        $row.attr("id","para"+currentLocation);
         var $inputField = $("<div></div>");
         $inputField.attr("class","input-field col s10");
         var $editI = $("<i>mode_edit</i>");
@@ -97,9 +132,32 @@
         $inputField.append($textAreaLabel);
         $row.append($inputField);
 
+        var $addButtonDiv = getAddParagraphButtonDiv();
+        $row.append($addButtonDiv);
+
+        var $dropButtonDiv = getDropParagraphButtonDiv();
+        $row.append($dropButtonDiv);
+
+        $("#paragraphs").append($row);
+        $('.tooltipped').tooltip({delay: 50});
+    }
+    function dropParagraph() {
+        $('.tooltipped').tooltip('remove');
+        $("#para"+currentLocation).remove();
+        currentLocation -= 1;
+        var $row = $("#para"+currentLocation);
+        if (currentLocation != 0) {
+            $row.append(getAddParagraphButtonDiv());
+            $row.append(getDropParagraphButtonDiv());
+        } else {
+            $row.append(getAddParagraphButtonDiv());
+        }
+        $('.tooltipped').tooltip({delay: 50});
+    }
+    function getAddParagraphButtonDiv() {
         var $addButtonDiv = $("<div></div>");
         $addButtonDiv.attr("id","addParagraphButton");
-        $addButtonDiv.attr("class","col s2");
+        $addButtonDiv.attr("class","col s1");
         var $buttonA = $("<a></a>");
         $buttonA.attr("onclick","addParagraph()");
         $buttonA.attr("style","cursor: pointer;");
@@ -108,13 +166,53 @@
         $buttonA.attr("data-delay","50");
         $buttonA.attr("data-tooltip","New paragraph!");
         var $buttonI = $("<i>add_circle</i>");
-        $buttonI.attr("class","material-icons medium teal-text");
+        $buttonI.attr("class","material-icons medium red-text");
         $buttonA.append($buttonI);
         $addButtonDiv.append($buttonA);
-        $row.append($addButtonDiv);
-
-        $("#paragraphs").append($row);
-        $('.tooltipped').tooltip({delay: 50});
+        return $addButtonDiv;
+    }
+    function getDropParagraphButtonDiv() {
+        var $dropButtonDiv = $("<div></div>");
+        $dropButtonDiv.attr("id","dropParagraphButton");
+        $dropButtonDiv.attr("class","col s1");
+        var $dropButtonA = $("<a></a>");
+        $dropButtonA.attr("onclick","dropParagraph()");
+        $dropButtonA.attr("style","cursor: pointer;");
+        $dropButtonA.attr("class","tooltipped");
+        $dropButtonA.attr("data-position","bottom");
+        $dropButtonA.attr("data-delay","50");
+        $dropButtonA.attr("data-tooltip","Drop paragraph!");
+        var $dropButtonI = $("<i>remove_circle</i>");
+        $dropButtonI.attr("class","material-icons medium blue-text");
+        $dropButtonA.append($dropButtonI);
+        $dropButtonDiv.append($dropButtonA);
+        return $dropButtonDiv;
+    }
+    function activateImage(checkbox) {
+        if(checkbox.checked==true) {
+            $("#file").removeAttr("hidden");
+            $("#chooseImage").attr("required","required");
+            $("#hasImage").attr("checked","checked");
+            $("#submitMood").attr("name","submitMood_image");
+        } else {
+            $("#file").attr("hidden","hidden");
+            $("#chooseImage").removeAttr("required");
+            $("#hasImage").removeAttr("checked");
+            $("#submitMood").attr("name","submitMood");
+        }
+    }
+    function activateLink(checkbox) {
+        if(checkbox.checked == true) {
+            $("#link").removeAttr("hidden");
+            $("#editLink").attr("required","required");
+            $("#linkDescription").removeAttr("hidden");
+            $("#hasLink").attr("checked","checked");
+        } else {
+            $("#link").attr("hidden","hidden");
+            $("#editLink").removeAttr("required");
+            $("#linkDescription").attr("hidden","hidden");
+            $("#hasLink").removeAttr("checked");
+        }
     }
 </script>
 </body>

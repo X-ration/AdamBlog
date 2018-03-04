@@ -56,9 +56,9 @@
                         <textarea th:field="${article.contentParagraphs[0]}" id="contentParagraph0" required="required" class="materialize-textarea"></textarea>
                         <label for="contentParagraph0">Article paragraph 0</label>
                     </div>
-                    <div id="addParagraphButton" class="col s2">
-                        <a onclick="addParagraph()" style="cursor: pointer;" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="New paragraph!">
-                            <i class="material-icons medium teal-text">add_circle</i>
+                    <div id="addParagraphButton" class="col s1">
+                        <a onclick="addParagraph()" style="cursor: pointer;" class="tooltipped btn-floating red waves-effect waves-light" data-position="bottom" data-delay="50" data-tooltip="New paragraph!">
+                            <i class="material-icons medium white-text">add</i>
                         </a>
                     </div>
                 </div>
@@ -109,8 +109,11 @@
     function addParagraph() {
         currentLocation += 1;
         $('.tooltipped').tooltip('remove');
-        $("#addParagraphButton").remove();
-        $("#dropParagraphButton").remove();
+        if (currentLocation != 1) {
+            $("#buttonCol").remove();
+        } else {
+            $("#addParagraphButton").remove();
+        }
 
         var $row = $("<div></div>");
         $row.attr("class","row");
@@ -132,11 +135,8 @@
         $inputField.append($textAreaLabel);
         $row.append($inputField);
 
-        var $addButtonDiv = getAddParagraphButtonDiv();
-        $row.append($addButtonDiv);
 
-        var $dropButtonDiv = getDropParagraphButtonDiv();
-        $row.append($dropButtonDiv);
+        $row.append(getButtonCol());
 
         $("#paragraphs").append($row);
         $('.tooltipped').tooltip({delay: 50});
@@ -147,8 +147,7 @@
         currentLocation -= 1;
         var $row = $("#para"+currentLocation);
         if (currentLocation != 0) {
-            $row.append(getAddParagraphButtonDiv());
-            $row.append(getDropParagraphButtonDiv());
+            $row.append(getButtonCol());
         } else {
             $row.append(getAddParagraphButtonDiv());
         }
@@ -161,12 +160,12 @@
         var $buttonA = $("<a></a>");
         $buttonA.attr("onclick","addParagraph()");
         $buttonA.attr("style","cursor: pointer;");
-        $buttonA.attr("class","tooltipped");
-        $buttonA.attr("data-position","bottom");
+        $buttonA.attr("class","tooltipped btn-floating red waves-effect waves-light");
+        $buttonA.attr("data-position","left");
         $buttonA.attr("data-delay","50");
         $buttonA.attr("data-tooltip","New paragraph!");
-        var $buttonI = $("<i>add_circle</i>");
-        $buttonI.attr("class","material-icons medium red-text");
+        var $buttonI = $("<i>add</i>");
+        $buttonI.attr("class","material-icons medium white-text");
         $buttonA.append($buttonI);
         $addButtonDiv.append($buttonA);
         return $addButtonDiv;
@@ -178,15 +177,34 @@
         var $dropButtonA = $("<a></a>");
         $dropButtonA.attr("onclick","dropParagraph()");
         $dropButtonA.attr("style","cursor: pointer;");
-        $dropButtonA.attr("class","tooltipped");
-        $dropButtonA.attr("data-position","bottom");
+        $dropButtonA.attr("class","tooltipped btn-floating blue waves-effect waves-light");
+        $dropButtonA.attr("data-position","left");
         $dropButtonA.attr("data-delay","50");
         $dropButtonA.attr("data-tooltip","Drop paragraph!");
-        var $dropButtonI = $("<i>remove_circle</i>");
-        $dropButtonI.attr("class","material-icons medium blue-text");
+        var $dropButtonI = $("<i>remove</i>");
+        $dropButtonI.attr("class","material-icons medium white-text");
         $dropButtonA.append($dropButtonI);
         $dropButtonDiv.append($dropButtonA);
         return $dropButtonDiv;
+    }
+    function getButtonCol() {
+        var $buttonCol = $("<div></div>");
+        $buttonCol.attr("class","col s2");
+        $buttonCol.attr("style","margin-top: 5px");
+        $buttonCol.attr("id","buttonCol");
+        var $rowAdd = $("<div></div>");
+        $rowAdd.attr("class","row");
+        $rowAdd.attr("style","margin-bottom: 10px");
+        var $addButtonDiv = getAddParagraphButtonDiv();
+        $rowAdd.append($addButtonDiv);
+        $buttonCol.append($rowAdd);
+        var $rowDrop = $("<div></div>");
+        $rowDrop.attr("class","row");
+        $rowDrop.attr("style","margin-top: 5px");
+        var $dropButtonDiv = getDropParagraphButtonDiv();
+        $rowDrop.append($dropButtonDiv);
+        $buttonCol.append($rowDrop);
+        return $buttonCol;
     }
     function activateImage(checkbox) {
         if(checkbox.checked==true) {

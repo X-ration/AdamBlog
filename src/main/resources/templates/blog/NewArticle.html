@@ -20,8 +20,8 @@
             </div>
         </nav>
     </div>
-    <div class="container">
-        <form action="/blog/newarticle" method="post">
+    <div class="row container">
+        <form action="/blog/newarticle" method="post" class="col s12">
             <!-- Key content -->
             <h4>Publish article</h4>
             <!-- Author -->
@@ -35,9 +35,17 @@
             <!-- Title -->
             <div class="row">
                 <div class="input-field col s12 m6">
-                    <i class="material-icons prefix">person</i>
+                    <i class="material-icons prefix">mode_edit</i>
                     <input th:field="${article.title}" id="title" type="text" required="required"/>
                     <label for="title">Title</label>
+                </div>
+            </div>
+            <!-- Abstract -->
+            <div class="row">
+                <div class="input-field col s10">
+                    <i class="material-icons prefix">mode_edit</i>
+                    <textarea th:field="${article.articleAbstract}" id="abstract" required="required" class="materialize-textarea"></textarea>
+                    <label for="abstract">Abstract</label>
                 </div>
             </div>
             <!-- Content Paragraphs -->
@@ -49,7 +57,7 @@
                         <label for="contentParagraph0">Article paragraph 0</label>
                     </div>
                     <div id="addParagraphButton" class="col s2">
-                        <a onclick="addParagraph()" style="cursor: pointer;">
+                        <a onclick="addParagraph()" style="cursor: pointer;" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="New paragraph!">
                             <i class="material-icons medium teal-text">add_circle</i>
                         </a>
                     </div>
@@ -66,7 +74,9 @@
     var currentLocation = 0;
     function addParagraph() {
         currentLocation += 1;
+        $('.tooltipped').tooltip('remove');
         $("#addParagraphButton").remove();
+
 
         var $row = $("<div></div>");
         $row.attr("class","row");
@@ -93,6 +103,10 @@
         var $buttonA = $("<a></a>");
         $buttonA.attr("onclick","addParagraph()");
         $buttonA.attr("style","cursor: pointer;");
+        $buttonA.attr("class","tooltipped");
+        $buttonA.attr("data-position","bottom");
+        $buttonA.attr("data-delay","50");
+        $buttonA.attr("data-tooltip","New paragraph!");
         var $buttonI = $("<i>add_circle</i>");
         $buttonI.attr("class","material-icons medium teal-text");
         $buttonA.append($buttonI);
@@ -100,6 +114,7 @@
         $row.append($addButtonDiv);
 
         $("#paragraphs").append($row);
+        $('.tooltipped').tooltip({delay: 50});
     }
 </script>
 </body>

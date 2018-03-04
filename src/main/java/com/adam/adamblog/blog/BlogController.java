@@ -2,10 +2,13 @@ package com.adam.adamblog.blog;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.ArrayList;
 
 /**
  * @author adam
@@ -31,9 +34,21 @@ public class BlogController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/newarticle")
+    @ModelAttribute
+    public Article getParagraphs() {
+        Article article = new Article();
+        return article;
+    }
+
+    @RequestMapping(value = "/newarticle", method = RequestMethod.GET)
     public String newArticle() {
         return "blog/NewArticle";
+    }
+
+    @RequestMapping(value = "/newarticle", method = RequestMethod.POST)
+    public String newArticle(Article article) {
+        System.out.println(article.getContentParagraphs());
+        return "redirect:/";
     }
 
     @RequestMapping(value = "/article/{articleId}", method = RequestMethod.GET)

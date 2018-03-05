@@ -39,6 +39,18 @@ public class Article {
         this.createdAt = createdAt;
     }
 
+    public Article(String author, String title, String articleAbstract, List<String> contentParagraphs, Boolean hasImage, String imageUrl, Boolean hasLink, String linkUrl, String linkDescription) {
+        this.author = author;
+        this.title = title;
+        this.articleAbstract = articleAbstract;
+        this.contentParagraphs = contentParagraphs;
+        this.hasImage = hasImage;
+        this.imageUrl = imageUrl;
+        this.hasLink = hasLink;
+        this.linkUrl = linkUrl;
+        this.linkDescription = linkDescription;
+    }
+
     public Article() {
         this.author = "";
         this.title = "";

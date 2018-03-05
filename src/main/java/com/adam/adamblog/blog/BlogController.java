@@ -1,5 +1,6 @@
 package com.adam.adamblog.blog;
 
+import com.adam.adamblog.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -8,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.swing.plaf.SeparatorUI;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 /**
@@ -47,7 +50,12 @@ public class BlogController {
     @RequestMapping(value = "/newarticle", method = RequestMethod.POST)
     public String newArticle(ArticleForm articleForm) {
         System.out.println(articleForm.getContentParagraphs());
-        return "redirect:/";
+        Article article = new Article(articleForm.getAuthor(),articleForm.getTitle(),
+                articleForm.getArticleAbstract(),articleForm.getContentParagraphs(),
+                articleForm.getHasImage(),"",
+                articleForm.getHasLink(),articleForm.getLinkUrl(), StringUtil.getOrCreate(articleForm.getLinkDescription(),"Additional Link"));
+        repository.addArticleNow(article);
+        return "redirect:";
     }
 
     @RequestMapping(value = "/article/{articleId}", method = RequestMethod.GET)

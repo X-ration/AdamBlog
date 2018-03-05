@@ -50,6 +50,13 @@ public class ArticleRepository {
         return articleMap.put(uniqueId, newArticle);
     }
 
+    public Article addArticleNow(Article newArticle) {
+        String uniqueId = UUID.randomUUID().toString();
+        newArticle.setArticleId(uniqueId);
+        newArticle.setCreatedAt(LocalDateTime.now());
+        return articleMap.put(uniqueId,newArticle);
+    }
+
     public Article dropArticle(Article article) throws ArticleNotFoundException{
         if(!exists(article.getArticleId())) {
             throw new ArticleNotFoundException("Article id ["+article.getArticleId()+"] cannot be found " +

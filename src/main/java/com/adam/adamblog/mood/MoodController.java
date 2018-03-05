@@ -1,5 +1,6 @@
 package com.adam.adamblog.mood;
 
+import com.adam.adamblog.util.StringUtil;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
@@ -68,7 +69,7 @@ public class MoodController {
         System.out.println(moodForm);
         Mood mood = new Mood(moodForm.getUserName(),moodForm.getContent(),
                 moodForm.getHasImage(),tempFile.getName(), moodForm.getHasLink(),
-                moodForm.getLinkUrl(),moodForm.getLinkDescription(), LocalDateTime.now());
+                moodForm.getLinkUrl(), StringUtil.getOrCreate(moodForm.getLinkDescription(),"Additional Link"), LocalDateTime.now());
         repository.addMood(mood);
         System.out.println(mood.getImageUrl());
         return "redirect:";

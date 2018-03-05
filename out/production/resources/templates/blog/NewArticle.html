@@ -21,7 +21,7 @@
         </nav>
     </div>
     <div class="row container">
-        <form action="/blog/newarticle" method="post" class="col s12">
+        <form action="/blog/newarticle" method="post" enctype="multipart/form-data" class="col s12">
             <!-- Key content -->
             <h4>Publish article</h4>
             <!-- Author -->
@@ -81,6 +81,18 @@
             <div class="row" hidden="hidden">
                 <input th:field="${articleForm.hasImage}" id="hasImage" type="checkbox"/>
                 <input th:field="${articleForm.hasLink}" id="hasLink" type="checkbox"/>
+            </div>
+            <!-- Choose image -->
+            <div class="row" id="file" hidden="hidden">
+                <div class="file-field input-field col s12">
+                    <div class="btn waves-effect flow">
+                        <span>Choose</span>
+                        <input id="chooseImage" name="chooseImage" type="file" class="btn-small"/>
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input id="imagePath" disabled="disabled" class="file-path" type="text"/>
+                    </div>
+                </div>
             </div>
             <!-- Add link -->
             <div class="row" id="link" hidden="hidden">
@@ -212,12 +224,12 @@
             $("#file").removeAttr("hidden");
             $("#chooseImage").attr("required","required");
             $("#hasImage").attr("checked","checked");
-            $("#submitMood").attr("name","submitMood_image");
+            $("#submitArticle").attr("name","submitArticle_image");
         } else {
             $("#file").attr("hidden","hidden");
             $("#chooseImage").removeAttr("required");
             $("#hasImage").removeAttr("checked");
-            $("#submitMood").attr("name","submitMood");
+            $("#submitArticle").attr("name","submitArticle");
         }
     }
     function activateLink(checkbox) {

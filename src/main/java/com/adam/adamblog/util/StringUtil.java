@@ -15,4 +15,8 @@ public class StringUtil {
         }
     }
 
+    public static String getFileExtension(String name) {
+        return name.substring(name.lastIndexOf("."));
+    }
+
 }

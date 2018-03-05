@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.io.*;
 import java.time.LocalDateTime;
 
+
 /**
  * @author adam
  * 创建于 2018-02-28 13:29.
@@ -28,7 +29,7 @@ import java.time.LocalDateTime;
 public class MoodController {
 
     private MoodRepository repository;
-    public static final Resource picturesDir = new FileSystemResource("/home/adam/document/images/mood/");
+    private static final Resource picturesDir = new FileSystemResource("/home/adam/document/images/mood/");
 
     @Autowired
     public MoodController(MoodRepository repository) {
@@ -60,7 +61,7 @@ public class MoodController {
         //记录：MultipartFile参数的名称要与HTML的控件name属性值一致，否则会提示400 Bad Request, file not present
         //upload image
         String filename = chooseImage.getOriginalFilename();
-        File tempFile = File.createTempFile("pic",getFileExtension(filename),picturesDir.getFile());
+        File tempFile = File.createTempFile("pic",StringUtil.getFileExtension(filename),picturesDir.getFile());
         try (InputStream in = chooseImage.getInputStream();
              OutputStream out = new FileOutputStream(tempFile)) {
             IOUtils.copy(in, out);
@@ -75,8 +76,6 @@ public class MoodController {
         return "redirect:";
     }
 
-    private static String getFileExtension(String name) {
-        return name.substring(name.lastIndexOf("."));
-    }
+
 
 }

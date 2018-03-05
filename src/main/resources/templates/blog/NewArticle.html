@@ -28,7 +28,7 @@
             <div class="row">
                 <div class="input-field col s12 m6">
                     <i class="material-icons prefix">person</i>
-                    <input th:field="${article.author}" id="author" type="text" required="required"/>
+                    <input th:field="${articleForm.author}" id="author" type="text" required="required"/>
                     <label for="author">Author</label>
                 </div>
             </div>
@@ -36,7 +36,7 @@
             <div class="row">
                 <div class="input-field col s12 m6">
                     <i class="material-icons prefix">mode_edit</i>
-                    <input th:field="${article.title}" id="title" type="text" required="required"/>
+                    <input th:field="${articleForm.title}" id="title" type="text" required="required"/>
                     <label for="title">Title</label>
                 </div>
             </div>
@@ -44,7 +44,7 @@
             <div class="row">
                 <div class="input-field col s10">
                     <i class="material-icons prefix">mode_edit</i>
-                    <textarea th:field="${article.articleAbstract}" id="abstract" required="required" class="materialize-textarea"></textarea>
+                    <textarea th:field="${articleForm.articleAbstract}" id="abstract" required="required" class="materialize-textarea"></textarea>
                     <label for="abstract">Abstract</label>
                 </div>
             </div>
@@ -53,11 +53,11 @@
                 <div class="row" id="para0">
                     <div class="input-field col s10">
                         <i class="material-icons prefix">mode_edit</i>
-                        <textarea th:field="${article.contentParagraphs[0]}" id="contentParagraph0" required="required" class="materialize-textarea"></textarea>
+                        <textarea th:field="${articleForm.contentParagraphs[0]}" id="contentParagraph0" required="required" class="materialize-textarea"></textarea>
                         <label for="contentParagraph0">Article paragraph 0</label>
                     </div>
                     <div id="addParagraphButton" class="col s1">
-                        <a onclick="addParagraph()" style="cursor: pointer;" class="tooltipped btn-floating red waves-effect waves-light" data-position="bottom" data-delay="50" data-tooltip="New paragraph!">
+                        <a onclick="addParagraph()" style="cursor: pointer;" class="tooltipped btn-floating blue waves-effect waves-light" data-position="bottom" data-delay="50" data-tooltip="New paragraph!">
                             <i class="material-icons medium white-text">add</i>
                         </a>
                     </div>
@@ -79,21 +79,21 @@
             </div>
             <!-- Hidden div used to get checkbox value -->
             <div class="row" hidden="hidden">
-                <input th:field="${article.hasImage}" id="hasImage" type="checkbox"/>
-                <input th:field="${article.hasLink}" id="hasLink" type="checkbox"/>
+                <input th:field="${articleForm.hasImage}" id="hasImage" type="checkbox"/>
+                <input th:field="${articleForm.hasLink}" id="hasLink" type="checkbox"/>
             </div>
             <!-- Add link -->
             <div class="row" id="link" hidden="hidden">
                 <div class="input-field col s12">
                     <i class="material-icons prefix">link</i>
-                    <input th:field="${article.linkUrl}" id="editLink" value="http://" type="text" class="validate" pattern="https?://.+\..+"/>
+                    <input th:field="${articleForm.linkUrl}" id="editLink" value="http://" type="text" class="validate" pattern="https?://.+\..+"/>
                     <label for="editLink" data-error="Please input a valid url." data-success="This url is valid.">Additional Link</label>
                 </div>
             </div>
             <div class="row" id="linkDescription" hidden="hidden">
                 <div class="input-field col s12">
                     <i class="material-icons prefix">description</i>
-                    <input th:field="${article.linkDescription}" id="editLinkDescription" placeholder="Link description(optional)" type="text"/>
+                    <input th:field="${articleForm.linkDescription}" id="editLinkDescription" placeholder="Link description(optional)" type="text"/>
                     <label for="editLinkDescription">Link Description</label>
                 </div>
             </div>
@@ -160,7 +160,7 @@
         var $buttonA = $("<a></a>");
         $buttonA.attr("onclick","addParagraph()");
         $buttonA.attr("style","cursor: pointer;");
-        $buttonA.attr("class","tooltipped btn-floating red waves-effect waves-light");
+        $buttonA.attr("class","tooltipped btn-floating blue waves-effect waves-light");
         $buttonA.attr("data-position","left");
         $buttonA.attr("data-delay","50");
         $buttonA.attr("data-tooltip","New paragraph!");
@@ -177,7 +177,7 @@
         var $dropButtonA = $("<a></a>");
         $dropButtonA.attr("onclick","dropParagraph()");
         $dropButtonA.attr("style","cursor: pointer;");
-        $dropButtonA.attr("class","tooltipped btn-floating blue waves-effect waves-light");
+        $dropButtonA.attr("class","tooltipped btn-floating red waves-effect waves-light");
         $dropButtonA.attr("data-position","left");
         $dropButtonA.attr("data-delay","50");
         $dropButtonA.attr("data-tooltip","Drop paragraph!");
@@ -194,16 +194,17 @@
         $buttonCol.attr("id","buttonCol");
         var $rowAdd = $("<div></div>");
         $rowAdd.attr("class","row");
-        $rowAdd.attr("style","margin-bottom: 10px");
+        $rowAdd.attr("style","margin-top: 5px");
         var $addButtonDiv = getAddParagraphButtonDiv();
         $rowAdd.append($addButtonDiv);
-        $buttonCol.append($rowAdd);
+
         var $rowDrop = $("<div></div>");
         $rowDrop.attr("class","row");
-        $rowDrop.attr("style","margin-top: 5px");
+        $rowDrop.attr("style","margin-bottom: 10px");
         var $dropButtonDiv = getDropParagraphButtonDiv();
         $rowDrop.append($dropButtonDiv);
         $buttonCol.append($rowDrop);
+        $buttonCol.append($rowAdd);
         return $buttonCol;
     }
     function activateImage(checkbox) {

@@ -35,9 +35,8 @@ public class BlogController {
     }
 
     @ModelAttribute
-    public Article getParagraphs() {
-        Article article = new Article();
-        return article;
+    public ArticleForm getArticleFormObject() {
+        return new ArticleForm();
     }
 
     @RequestMapping(value = "/newarticle", method = RequestMethod.GET)
@@ -46,8 +45,8 @@ public class BlogController {
     }
 
     @RequestMapping(value = "/newarticle", method = RequestMethod.POST)
-    public String newArticle(Article article) {
-        System.out.println(article.getContentParagraphs());
+    public String newArticle(ArticleForm articleForm) {
+        System.out.println(articleForm.getContentParagraphs());
         return "redirect:/";
     }
 

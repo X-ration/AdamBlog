@@ -15,7 +15,6 @@ public class MoodForm {
     private Boolean hasLink;
     private String linkUrl;
     private String linkDescription;
-    private LocalDateTime createdAt;
 
     @Override
     public String toString() {
